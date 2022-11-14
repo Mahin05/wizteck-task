@@ -1,31 +1,25 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 
 const Home = () => {
-    const data = useRef();
-    const [title, setTitle] = useState("")
-    const [url, setUrl] = useState("")
-    // const [pswd, setPswd] = useState("")
-    const handle = () => {
-        localStorage.setItem("title", title)
-        localStorage.setItem("url", url)
-        // localStorage.setItem("password",pswd)
+    const [title, setTitle] = useState([]);
+    const [url, setUrl] = useState([]);
+    const [category, setCategory] = useState([]);
+    const handle = (event) => {
+        // let oldData = JSON.parse(localStorage.getItem('items'))
+        localStorage.setItem("title", title);
+        localStorage.setItem("url", url);
+        localStorage.setItem("category", category);
+        event.preventDefault()
+
     }
-
-
-    function add() {
-        var new_chq_no = parseInt($('#total_chq').val()) + 1;
-        var new_input = "<input type='text' id='new_" + new_chq_no + "'>";
-        ('#new_chq').html(new_input);
-    }
-
     const handleClick = (event) => {
-        console.log(data.current.value, "value");
-        localStorage.setItem('inputValue', data.current.value);
+        // console.log(data.current.value, "value");
+        // localStorage.setItem('inputValue', data.current.value);
+        localStorage.setItem("category", category)
         event.preventDefault()
     }
-    console.log(localStorage.getItem("inputValue"), "****");
     return (
-        <div>
+        <div style={{ 'display': 'flex', 'justifyContent': 'space-evenly', 'alignItems': 'center' }}>
             <div className="catgory-modal">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Add Category
@@ -34,22 +28,18 @@ const Home = () => {
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">category</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <form>
                                     <div class="mb-3">
                                         <label>Category</label>
-                                        <input ref={data} type="text" name="" id="" />
+                                        <input onChange={(e) => setCategory(e.target.value)} type="text" name="" id="" />
                                     </div>
                                     <button onClick={handleClick} type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                            {/* <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Understood</button>
-                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -62,7 +52,7 @@ const Home = () => {
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">bookmark</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -71,23 +61,13 @@ const Home = () => {
                                         <label>Bookamrk</label>
                                         <input onChange={(e) => setTitle(e.target.value)} type="text" name="" id="" placeholder='Title' />
                                         <input onChange={(e) => setUrl(e.target.value)} type="text" name="" id="" placeholder='URL' />
-                                        <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Dropdown button
-                                            </button>
-                                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                                            </ul>
-                                        </div>
+                                        <label for="cars">Choose a category :</label>
+                                        <select name="cars" id="cars">
+                                            <option onChange={(e) => setCategory(e.target.value)}>{localStorage.getItem("category")}</option>
+                                        </select>
                                     </div>
-                                    <button onClick={handleClick} type="submit" class="btn btn-primary">Submit</button>
+                                    <button onClick={handle} type="submit" class="btn btn-primary">Submit</button>
                                 </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
                             </div>
                         </div>
                     </div>
