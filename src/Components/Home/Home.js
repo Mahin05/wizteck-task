@@ -20,7 +20,7 @@ const Home = () => {
     }
     return (
         <div style={{ 'display': 'flex', 'justifyContent': 'space-evenly', 'alignItems': 'center' }}>
-            <div className="catgory-modal">
+            <div className="catgory-modal mt-5">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                     Add Category
                 </button>
@@ -44,9 +44,9 @@ const Home = () => {
                     </div>
                 </div>
             </div>
-            <div className="bookmark-modal">
+            <div className="bookmark-modal mt-5">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Launch demo modal
+                Add Bookmark
                 </button>
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
